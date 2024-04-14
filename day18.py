@@ -10,12 +10,15 @@ timmy = turtle.Turtle()
 timmy.speed("fastest")
 timmy.pensize(5)
 
-for _ in range(0, 50):
-    timmy.color(randint(0,255), randint(0,255), randint(0,255))
-    timmy.circle(80)
-    cur_heading = timmy.heading()
-    timmy.setheading(cur_heading + 10)
+def draw_spirograph(size_of_gap):
+    """Draw spirograph with defined size of gap."""
+    for _ in range(int(360 / size_of_gap)):
+        timmy.color(randint(0,255), randint(0,255), randint(0,255))
+        timmy.circle(100)
+        timmy.setheading(timmy.heading() + size_of_gap)
 
+
+draw_spirograph(15)
 
 # distance = 20
 # angles = [0, 90, 180, 270]
