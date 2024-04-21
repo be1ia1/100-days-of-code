@@ -12,11 +12,9 @@ class Player(Turtle):
         self.shape('turtle')
         self.penup()
         self.setheading(90)
-        # self.goto(STARTING_POSITION)
         self.next_round()
 
     def move_up(self):
-        # new_y = self.ycor() + MOVE_DISTANCE
         self.forward(MOVE_DISTANCE)
     
     def next_round(self):

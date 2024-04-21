@@ -22,23 +22,20 @@ game_is_on = True
 while game_is_on:
     time.sleep(0.1)
     screen.update()
+    carman.create_car()
+    carman.move()
+    print(len(carman.cars))
     for car in carman.cars:
-        car.move()
-        if car.xcor() < -320:
-            '''cars moves'''
-            car.to_begin()
         if player.distance(car) < 20:
             '''car crash'''
             scoreboard.reset_score()
-            for car in carman.cars:
-                car.car_speed = 0
+            carman.car_speed = 0
             player.next_round()
-    if player.ycor() > 280:
-        '''player win'''
-        scoreboard.update_score()
-        for car in carman.cars:
-            car.car_speed += 1
-        player.next_round()
+        if player.ycor() > 280:
+            '''player win round'''
+            scoreboard.update_score()
+            carman.car_speed += 10
+            player.next_round()
             
 
 screen.exitonclick()
