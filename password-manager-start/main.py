@@ -1,6 +1,21 @@
 import tkinter as tk
+from tkinter import messagebox
 from random import randint, choice, shuffle
 import pyperclip
+import json
+# get password data
+def get_password():
+    try:
+        with open('database.json', 'r') as fo:
+            data = json.load(fo)
+    except FileNotFoundError:
+        pass
+    else:
+        for entry in data:
+            if entry_website.get() == entry:
+                m_box = messagebox.showinfo(title=f'{entry.title()}',
+                                            message=f'Email: {data[entry]['email']}\nPassword: {data[entry]['password']}')
+
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 def generate_password():
     
@@ -21,11 +36,22 @@ def generate_password():
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 def save_password():
-    site = entry_website.get()
-    email = entry_email.get()
-    password = entry_password.get()
-    with open('database.txt', 'a') as fo:
-        fo.write(f'{site} | {email} | {password}\n')
+    new_item = {
+        entry_website.get(): {
+            'email': entry_email.get(),
+            'password': entry_password.get()
+        }
+    }
+    try:
+        with open('database.json', 'r') as fo:
+            data = json.load(fo)
+            data.update(new_item)
+    except FileNotFoundError:
+        with open('database.json', 'w') as fo:
+            json.dump(new_item, fo, indent=4)
+    else:
+        with open('database.json', 'w') as fo:
+            json.dump(data, fo, indent=4)
     entry_website.delete(0, tk.END)
     entry_password.delete(0, tk.END)
 # ---------------------------- UI SETUP ------------------------------- #
@@ -43,8 +69,11 @@ label_website = tk.Label(text='Website:')
 label_website.grid(column=0, row=1)
 
 entry_website = tk.Entry(width=35)
-entry_website.grid(column=1, row=1, columnspan=2, sticky=tk.EW)
+entry_website.grid(column=1, row=1, sticky=tk.EW)
 entry_website.focus()
+
+button_search = tk.Button(text='Search', command=get_password)
+button_search.grid(column=2, row=1, sticky=tk.EW)
 
 label_email = tk.Label(text='Email/Username:')
 label_email.grid(column=0, row=2)
