@@ -2,7 +2,22 @@ import tkinter as tk
 from tkinter import messagebox
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 def generate_password():
-    pass
+    
+    letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+    numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+    symbols = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
+
+    password_list = []
+    password_list.extend([choice(letters) for _ in range(randint(8, 10))])
+    password_list.extend([choice(symbols) for _ in range(randint(2, 4))])
+    password_list.extend([choice(numbers) for _ in range(randint(2, 4))])
+    shuffle(password_list)
+    password = ''.join(password_list)
+
+    pyperclip.copy(password)
+    entry_password.insert(0, password)
+    
+
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 def save_password():
     site = entry_website.get()
@@ -36,8 +51,11 @@ label_website = tk.Label(text='Website:')
 label_website.grid(column=0, row=1)
 
 entry_website = tk.Entry(width=35)
-entry_website.grid(column=1, row=1, columnspan=2, sticky=tk.EW)
+entry_website.grid(column=1, row=1, sticky=tk.EW)
 entry_website.focus()
+
+button_search = tk.Button(text='Search', command=get_password)
+button_search.grid(column=2, row=1, sticky=tk.EW)
 
 label_email = tk.Label(text='Email/Username:')
 label_email.grid(column=0, row=2)
