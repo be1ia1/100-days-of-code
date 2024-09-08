@@ -36,6 +36,8 @@ while game_is_on:
             scoreboard.update_score()
             carman.car_speed += 10
             player.next_round()
-            
+        if car.xcor() < -310:
+            carman.cars.remove(car)
+
 
 screen.exitonclick()

@@ -27,5 +27,3 @@ print(data[data['day'] == 'Monday'])
 
 # celcium = data[data.day == 'Monday'].temp[0]
 # print(celcium * 9 / 5 + 32)
-
-

@@ -7,8 +7,8 @@ red = len(data[data['Primary Fur Color'] == 'Cinnamon'])
 black = len(data[data['Primary Fur Color'] == 'Black'])
 
 color = ['grey', 'red', 'black']
-count =  [grey, red, black]
+count = [grey, red, black]
 
-df = pd.DataFrame(list(zip(color, count)), columns =['Fur Color', 'Count'])
+df = pd.DataFrame(list(zip(color, count)), columns=['Fur Color', 'Count'])
 
 df.to_csv('squrrel_count.csv')

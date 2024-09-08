@@ -27,7 +27,7 @@ while is_on:
         correct.append(answer_state)
         state_data = data[data.state == answer_state]
         timmy.goto(int(state_data.x), int(state_data.y))
-        timmy.write(answer_state, align='center')    
+        timmy.write(answer_state, align='center')
     print(len(correct))
 
 screen.mainloop()
