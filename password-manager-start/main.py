@@ -1,21 +1,5 @@
 import tkinter as tk
 from tkinter import messagebox
-from random import randint, choice, shuffle
-import pyperclip
-import json
-# get password data
-def get_password():
-    try:
-        with open('database.json', 'r') as fo:
-            data = json.load(fo)
-    except FileNotFoundError:
-        pass
-    else:
-        for entry in data:
-            if entry_website.get() == entry:
-                m_box = messagebox.showinfo(title=f'{entry.title()}',
-                                            message=f'Email: {data[entry]['email']}\nPassword: {data[entry]['password']}')
-
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 def generate_password():
     
@@ -36,24 +20,22 @@ def generate_password():
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 def save_password():
-    new_item = {
-        entry_website.get(): {
-            'email': entry_email.get(),
-            'password': entry_password.get()
-        }
-    }
-    try:
-        with open('database.json', 'r') as fo:
-            data = json.load(fo)
-            data.update(new_item)
-    except FileNotFoundError:
-        with open('database.json', 'w') as fo:
-            json.dump(new_item, fo, indent=4)
+    site = entry_website.get()
+    email = entry_email.get()
+    password = entry_password.get()
+    is_not_empty = all([site, email, password])
+    if is_not_empty:
+        is_ok = messagebox.askokcancel(title=site,
+                            message=f'These are the details entered:\n \
+                            Email: {email}\nPassword: {password}\n \
+                                Is it ok to save?')
+        if is_ok:
+            with open('database.txt', 'a') as fo:
+                fo.write(f'{site} | {email} | {password}\n')
+            entry_website.delete(0, tk.END)
+            entry_password.delete(0, tk.END)
     else:
-        with open('database.json', 'w') as fo:
-            json.dump(data, fo, indent=4)
-    entry_website.delete(0, tk.END)
-    entry_password.delete(0, tk.END)
+        messagebox.showwarning(title='Oops..', message='Check empty fields..')
 # ---------------------------- UI SETUP ------------------------------- #
 
 window = tk.Tk()
