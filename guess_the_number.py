@@ -8,7 +8,7 @@ def game_round():
     # print(number)
     print("I'm thinking of a number between 1 and 100.")
     # difficulty = input("Choose a difficulty. Type 'easy' or 'hard': ")
-    difficulty = 'easy'
+    difficulty = 'hard'
     attempts = 10 if difficulty == 'easy' else 5
 
     player_wins = False
@@ -29,7 +29,7 @@ def game_round():
     if player_wins:
         print("You win!")
     else:
-        print("You lose..")
+        print(f"You lose.. The number is: {number}")
     one_more = input("One more game: ")
     if one_more == 'y':
         game_round()
