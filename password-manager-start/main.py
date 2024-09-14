@@ -1,3 +1,7 @@
+import pyperclip
+import pandas as pd
+import json
+from random import randint, choice, shuffle
 import tkinter as tk
 from tkinter import messagebox
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
@@ -30,12 +34,35 @@ def save_password():
                             Email: {email}\nPassword: {password}\n \
                                 Is it ok to save?')
         if is_ok:
-            with open('database.txt', 'a') as fo:
-                fo.write(f'{site} | {email} | {password}\n')
+            new_data = {
+                site : {
+                    "username": email,
+                    "password": password
+                }
+            }
+            with open('database.json', encoding="utf8") as fo:
+                data = json.load(fo)
+            with open('database.json', "w", encoding="utf8") as fo:
+                if data:
+                    data.update(new_data)
+                    json.dump(data, fo, indent=4)
+                else:
+                    json.dump(new_data, fo, indent=4)
             entry_website.delete(0, tk.END)
             entry_password.delete(0, tk.END)
     else:
         messagebox.showwarning(title='Oops..', message='Check empty fields..')
+# ---------------------------- GET PASSWORD -------------------------- #
+def get_password():
+    with open('database.json', encoding="utf8") as fo:
+        data = json.load(fo)
+    u_site = entry_website.get()
+    if u_site in data.keys():
+        u_password = data[u_site]['password']
+        pyperclip.copy(u_password)
+        entry_password.insert(0, u_password)
+
+
 # ---------------------------- UI SETUP ------------------------------- #
 
 window = tk.Tk()
