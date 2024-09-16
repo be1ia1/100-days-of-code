@@ -23,10 +23,10 @@ class QuizInterface:
         self.canvas.grid(column=0,row=1, columnspan=2, sticky=EW, pady=50)
 
         yes_image = PhotoImage(file='images/true.png')
-        self.yes_button = Button(image=yes_image, highlightthickness=0)
+        self.yes_button = Button(image=yes_image, highlightthickness=0, command=self.quiz.check_answer("True"))
         self.yes_button.grid(column=0, row=2)
         no_image = PhotoImage(file='images/false.png')
-        self.no_button = Button(image=no_image, highlightthickness=0)
+        self.no_button = Button(image=no_image, highlightthickness=0, command=self.quiz.check_answer("False"))
         self.no_button.grid(column=1, row=2)
 
         self.window.mainloop()

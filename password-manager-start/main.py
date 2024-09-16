@@ -1,13 +1,16 @@
-import pyperclip
-import pandas as pd
 import json
 from random import randint, choice, shuffle
 import tkinter as tk
 from tkinter import messagebox
+import pyperclip
+
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
+
+
 def generate_password():
-    
-    letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+
+    letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y',
+               'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
     numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
     symbols = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
 
@@ -20,7 +23,7 @@ def generate_password():
 
     pyperclip.copy(password)
     entry_password.insert(0, password)
-    
+
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 def save_password():
@@ -30,12 +33,12 @@ def save_password():
     is_not_empty = all([site, email, password])
     if is_not_empty:
         is_ok = messagebox.askokcancel(title=site,
-                            message=f'These are the details entered:\n \
+                                       message=f'These are the details entered:\n \
                             Email: {email}\nPassword: {password}\n \
                                 Is it ok to save?')
         if is_ok:
             new_data = {
-                site : {
+                site: {
                     "username": email,
                     "password": password
                 }
@@ -53,6 +56,8 @@ def save_password():
     else:
         messagebox.showwarning(title='Oops..', message='Check empty fields..')
 # ---------------------------- GET PASSWORD -------------------------- #
+
+
 def get_password():
     with open('database.json', encoding="utf8") as fo:
         data = json.load(fo)
@@ -72,7 +77,7 @@ window.config(padx=50, pady=50)
 canvas = tk.Canvas(width=200, height=200)
 photo = tk.PhotoImage(file='logo.png')
 canvas.create_image(100, 100, image=photo)
-canvas.grid(column=1,row=0)
+canvas.grid(column=1, row=0)
 
 label_website = tk.Label(text='Website:')
 label_website.grid(column=0, row=1)
@@ -97,7 +102,8 @@ label_password.grid(column=0, row=3)
 entry_password = tk.Entry(width=21)
 entry_password.grid(column=1, row=3, sticky=tk.EW)
 
-button_password = tk.Button(text='Generate Password', command=generate_password)
+button_password = tk.Button(
+    text='Generate Password', command=generate_password)
 button_password.grid(column=2, row=3)
 
 button_add = tk.Button(text='Add', width=36, command=save_password)
