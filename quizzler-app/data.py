@@ -6,7 +6,7 @@ TRIVIA_PARAMS = {
 }
 TRIVIA_URL = "https://opentdb.com/api.php"
 
-response = requests.get(url=TRIVIA_URL, params=TRIVIA_PARAMS)
+response = requests.get(url=TRIVIA_URL, params=TRIVIA_PARAMS, timeout=1)
 response.raise_for_status()
 data = response.json()
 question_data = data["results"]
