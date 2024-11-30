@@ -6,11 +6,10 @@ def show_cards(name, info):
     print(f"{name.title()} have:")
     for card in info['cards']:
         print(card) 
-    print(f"Sum is {info['sum']}")
+    print(f"Sum is {sum(info['cards'])}")
 
 def give_one_more_card():
     player['cards'].append(choice(cards))
-    player['sum'] = sum(player['cards'])
     show_cards('player', player)
 
 cards = [11,2,3,4,5,6,7,8,9,10,10,10,10]
@@ -19,22 +18,19 @@ one_more_game = True
 
 while one_more_game:
     dealer = {
-        'cards': [choice(cards), choice(cards)],
-        'sum' : 0
+        'cards': [choice(cards), choice(cards)]
     }
-    dealer['sum'] = sum(dealer['cards'])
 
     player = {
-        'cards': [choice(cards), choice(cards)],
-        'sum': 0
+        'cards': [choice(cards), choice(cards)]
     }
-    player['sum'] = sum(player['cards'])
 
     game_not_over = True
     while game_not_over:
         show_cards('player', player)
         one_more_card = True
         while one_more_card:
+            sum_player = sum(player['cards'])
             ask_card = input('Do you want one more card? ')
             if ask_card == 'y':
                 give_one_more_card()
@@ -43,9 +39,10 @@ while one_more_game:
                     if value_ace == 1:
                         index_ace = player['cards'].index(11)
                         player['cards'][index_ace] = 1
-                        player['sum'] = sum(player['cards'])
+                        sum_player += 1
                         show_cards('player', player)
-                if player['sum'] > 21:
+                sum_player = sum(player['cards'])
+                if sum_player > 21:
                     print(f"You lose with {player['cards']}")
                     one_more_card = False
                     game_not_over = False
@@ -57,19 +54,20 @@ while one_more_game:
         print('No more cards')
         print('-----------------------------------')
         show_cards('dealer', dealer)
-        if dealer['sum'] < 17:
+        sum_dealer = sum(dealer['cards'])
+        if sum_dealer < 17:
             print('Dealer sum is less then 17.. One more card to dealer..')
             dealer['cards'].append(choice(cards))
-            dealer['sum'] = sum(dealer['cards'])
+            sum_dealer = sum(dealer['cards'])
             show_cards('dealer', dealer)
         
-        if dealer['sum'] > 21:
+        if sum_dealer > 21:
             print(f"Dealer lose with {dealer['cards']}")
-        elif dealer['sum'] == player['sum']:
+        elif sum_dealer == sum_player:
             print('Draw..')
-        elif dealer['sum'] > player['sum']:
+        elif sum_dealer > sum_player:
             print('Dealer wins')
-        elif dealer['sum'] < player['sum']:
+        elif sum_dealer < sum_player:
             print('Player wins')
         game_not_over = False
 
