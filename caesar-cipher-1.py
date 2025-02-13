@@ -1,11 +1,10 @@
 alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
-             'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
-               'w', 'x', 'y', 'z']
+            'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
+            'w', 'x', 'y', 'z']
 
 # direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n")
 # text = input("Type your message:\n").lower()
 # shift = int(input("Type the shift number:\n"))
-
 
 
 def caesar(direction, text, shift_amount):
@@ -21,6 +20,7 @@ def caesar(direction, text, shift_amount):
         answer += alphabet[new_index]
 
     return answer
+
 
 print()
 print(caesar('encode', 'hello', 56))

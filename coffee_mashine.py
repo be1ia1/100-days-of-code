@@ -35,8 +35,7 @@ def check_transaction(user_sum, user_input):
     drink_cost = MENU[user_input]["cost"]
     if user_sum >= drink_cost:
         return True
-    else:
-        return False
+    return False
 
 def transaction(user_sum, user_input):
     drink_cost = MENU[user_input]["cost"]
@@ -70,3 +69,5 @@ while coffee_machine_on:
             if check_transaction(user_sum, drink):
                 transaction(user_sum, drink)
                 print(make_coffee(drink))
+            else:
+                print('Sorry, not enough coins..')

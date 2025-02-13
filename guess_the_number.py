@@ -18,10 +18,10 @@ def game_round():
         if player_guess == number:
             player_wins = True
             break
-        elif player_guess > number:
+        if player_guess > number:
             print("Too high.")
             attempts -= 1
-        elif player_guess < number:
+        if player_guess < number:
             print("Too low.")
             attempts -= 1
 

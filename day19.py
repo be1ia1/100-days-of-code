@@ -10,7 +10,7 @@ turtles = []
 
 user_bet = screen.textinput(title='Make your bet', prompt='Which turtle will win the race? Enter a color: ')
 
-is_race_on = False
+
 
 y_pos = -90
 
@@ -22,8 +22,11 @@ for color in colors:
     y_pos += 30
     turtles.append(timmy)
 
-if user_bet:
-    is_race_on = True
+# if user_bet:
+#     is_race_on = True
+
+winner = None
+is_race_on = True
 
 while is_race_on:
     for tle in turtles:
@@ -32,6 +35,7 @@ while is_race_on:
         if tle.xcor() >= 235:
             winner = tle.color()[0]
             is_race_on = False
+
 if winner == user_bet:
     print(f"You win! With {user_bet}..")
 else:

@@ -14,6 +14,7 @@ print(display)
 end_of_game = False
 
 while not end_of_game:
+    print(f'You have {lives} lives')
     guess = input("Guess a letter: ").lower()
 
     for index, letter in enumerate(chosen_word):
