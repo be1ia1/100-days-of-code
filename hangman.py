@@ -1,12 +1,15 @@
 from random import choice
 from hangman_words import word_list
 from hangman_art import stages
+import pyfiglet
+
+print(pyfiglet.figlet_format('hangman'))
 
 lives = 6
-# word_list = ["ardvark", "baboon", "camel"]
+# # word_list = ["ardvark", "baboon", "camel"]
 
 chosen_word = choice(word_list)
-
+print(chosen_word)
 
 display = ["_"] * len(chosen_word)
 print(display)

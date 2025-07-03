@@ -1,4 +1,5 @@
 from random import choice
+
 rock = '''
     _______
 ---'   ____)
@@ -26,21 +27,30 @@ scissors = '''
 ---.__(___)
 '''
 
-# Write your code below this line 👇
-
 variants = ['rock', 'paper', 'scissors']
 
-player1 = choice(variants)
-player2 = choice(variants)
 
-print(f"{player1} vs {player2}")
+def game_round():
+    player1 = choice(variants)
+    player2 = choice(variants)
 
-if player1 == player2:
-    print('Draw!')
+    for player in (player1, player2):
+        if player == 'rock':
+            print(rock)
+        elif player == 'paper':
+            print(paper)
+        else:
+            print(scissors)
 
-elif player1 == 'rock' and player2 == 'scissors' or \
-        player1 == 'paper' and player2 == 'rock' or \
-        player1 == 'scissors' and player2 == 'paper':
-    print(f"player1 win!")
-else:
-    print(f"player2 wins!")
+    if player1 == player2:
+        print('Draw')
+    else:
+        if (player1 == 'rock' and player2 == 'scissors') or\
+            (player1 == 'paper' and player2 == 'rock') or\
+                (player1 == 'scissors' and player2 == 'paper'):
+            print('Player 1 Win')
+        else:
+            print('PLayer 2 Win')
+
+
+game_round()

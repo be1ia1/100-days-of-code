@@ -23,35 +23,27 @@ ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
 /______/______/______/______/______/______/______/______/______/______/_____ /
 *******************************************************************************
 ''')
-print("Welcome to Treasure Island.")
-print("Your mission is to find the treasure.")
 
-# https://www.draw.io/?lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=Treasure%20Island%20Conditional.drawio#Uhttps%3A%2F%2Fdrive.google.com%2Fuc%3Fid%3D1oDe4ehjWZipYRsVfeAx2HyB7LCQ8_Fvi%26export%3Ddownload
-
-# Write your code below this line 👇
-
-direction = input(
-    "You're at a crossroad. Where do you want to go? Type \"left\" or \"right\" ")
-if direction == "left":
-    action = input(
-        "You've come to a lake. There is an island in the middle of the lake. Type \"wait\" to wait for a boat. Type \"swim\" to swim across. ")
-    if action == "wait":
-        door = input(
-            "You arrive at the island unharmed. There is a house with 3 doors. One red, one yellow and one blue. Which colour do you choose? ")
-        if door == "red":
-            print("Burned by fire.\nGame Over.")
-            sys.exit()
-        elif door == "yellow":
-            print("You Win!")
-            sys.exit()
-        elif door == "blue":
-            print("Eaten by beasts.\nGame Over.")
-            sys.exit()
-        else:
-            print("Game Over.")
-    else:
-        print("Attacked by trout.\nGame Over.")
-        sys.exit()
+print('Welcome to Treasure Island.')
+print('Your mission is to find the treasure.')
+answer = input("You're at a cross road. Where do you want to go?\n"
+               "Type 'left' or 'right'\n")
+if answer == 'left':
+    answer = input(
+        "You're come to a lake. There is an island in the middle of the lake.\n"
+        "Type 'wait' to wait for a boat. Type 'swim' to swim across.\n")
 else:
-    print("Fall into a hole.\nGame Over.")
+    print("Fall into a hole. Game Over.")
     sys.exit()
+if answer == 'wait':
+    answer = input("You arrive at the island unharmed. There is a house with 3 doors. "
+                   "One red, one yellow and one blue. Which colour do you choose?\n")
+else:
+    print("Attacked by trout. Game Over.")
+    sys.exit()
+if answer == 'yellow':
+    print("You win!")
+elif answer == 'red':
+    print("Burned by fire. Game Over.")
+elif answer == 'blue':
+    print('Eaten by beasts. Game Over.')

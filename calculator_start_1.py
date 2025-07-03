@@ -1,52 +1,31 @@
 import sys
-from random import randint
-
-
-def add(a, b):
-    return a + b
-
-
-def substract(a, b):
-    return a - b
-
-
-def multiply(a, b):
-    return a * b
-
-
-def divide(a, b):
-    return a / b
-
-
-operations = {
-    "+": add,
-    "-": substract,
-    "*": multiply,
-    "/": divide
-}
 
 
 def calculation():
-    num1 = float(input("Insert number #1: "))
-    keep_calculating = True
-    while keep_calculating:
-        num2 = float(input("Insert number #2: "))
-        for operation in operations:
-            print(operation)
-        selected_operation = input("Select operation: ")
-
-        result = operations[selected_operation](num1, num2)
-
-        print(f"The result is: {num1} {selected_operation} {num2} = {result}")
-
-        continue_calc = input("Do you want continue calculate with result? ")
-        if continue_calc == 'q':
-            sys.exit()
-        elif continue_calc == 'y':
-            num1 = result
-        elif continue_calc == 'n':
-            keep_calculating = False
-            calculation()
+    while True:
+        first_num = int(input('Enter first number: '))
+        keep_calculation = True
+        while keep_calculation:
+            second_num = int(input('Enter second number: '))
+            print('+\n-\n*\n/')
+            operation = input('Pick an operation: ')
+            match operation:
+                case '+':
+                    answer = first_num + second_num
+                case '-':
+                    answer = first_num - second_num
+                case '*':
+                    answer = first_num * second_num
+                case '/':
+                    answer = first_num / second_num
+            print(f'The result of {first_num} {operation} {second_num} = {answer}')
+            use_result = input('Do you want use result in next calculation? ')
+            if use_result == 'y':
+                first_num = answer
+            elif use_result == 'n':
+                break
+            else:
+                sys.exit()
 
 
 calculation()
