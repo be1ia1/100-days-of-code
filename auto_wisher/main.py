@@ -9,6 +9,7 @@ EMAIL = "belial.agula@gmail.com"
 with open('secret.txt', encoding="utf-8") as fo:
     PASSWORD = fo.read()
 
+
 def send_email(body_text, to_email):
     """Send via gmail"""
     with smtplib.SMTP("smtp.gmail.com", 587) as connection:
@@ -18,11 +19,13 @@ def send_email(body_text, to_email):
                             to_addrs=to_email,
                             msg=f"Subject: Happy Birthday!\n\n{body_text}")
 
+
 now = dt.datetime.now()
 
 birthdays = pd.read_csv("birthdays.csv")
 
-happy_birthday = birthdays.loc[(birthdays["month"] == now.month) & (birthdays["day"] == now.day)]
+happy_birthday = birthdays.loc[(birthdays["month"] == now.month) & (
+    birthdays["day"] == now.day)]
 
 if not happy_birthday.empty:
     b_name = happy_birthday.name.values[0]

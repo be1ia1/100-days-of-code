@@ -1,14 +1,14 @@
 import turtle
 import pandas as pd
 
-data = pd.read_csv('50_states.csv')
+data = pd.read_csv('day-25-us-states-game-start/50_states.csv')
 # states = data.state
 
 
 screen = turtle.Screen()
 screen.title('U.S. States Game')
 
-image = 'blank_states_img.gif'
+image = 'day-25-us-states-game-start/blank_states_img.gif'
 screen.addshape(image)
 
 turtle.shape(image)

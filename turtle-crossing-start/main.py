@@ -24,7 +24,8 @@ while game_is_on:
     screen.update()
     carman.create_car()
     carman.move()
-    print(len(carman.cars))
+    # print(len(carman.cars))
+
     for car in carman.cars:
         if player.distance(car) < 20:
             '''car crash'''
@@ -34,7 +35,7 @@ while game_is_on:
         if player.ycor() > 280:
             '''player win round'''
             scoreboard.update_score()
-            carman.car_speed += 10
+            carman.level_up()
             player.next_round()
         if car.xcor() < -310:
             carman.cars.remove(car)
