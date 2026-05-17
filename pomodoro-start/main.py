@@ -61,7 +61,7 @@ label_timer = tk.Label(text='Timer', font=(FONT_NAME, 40, 'bold'), bg=YELLOW, fg
 label_timer.grid(column=1, row=0)
 
 canvas = tk.Canvas(width=200, height=224, bg=YELLOW, highlightthickness=0)
-photo = tk.PhotoImage(file='tomato.png')
+photo = tk.PhotoImage(file='pomodoro-start/tomato.png')
 canvas.create_image(100, 112, image=photo)
 timer_text = canvas.create_text(100, 132, text='00:00', fill='white', font=(FONT_NAME, 35, 'bold'))
 canvas.grid(column=1, row=1)

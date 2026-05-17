@@ -3,6 +3,7 @@ from random import randint, choice, shuffle
 import tkinter as tk
 from tkinter import messagebox
 import pyperclip
+import os
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 
@@ -43,9 +44,11 @@ def save_password():
                     "password": password
                 }
             }
-            with open('database.json', encoding="utf8") as fo:
-                data = json.load(fo)
-            with open('database.json', "w", encoding="utf8") as fo:
+            data = ''
+            if os.path.exists('password-manager-start/database.json'):
+                with open('password-manager-start/database.json', encoding="utf8") as fo:
+                    data = json.load(fo)
+            with open('password-manager-start/database.json', "w", encoding="utf8") as fo:
                 if data:
                     data.update(new_data)
                     json.dump(data, fo, indent=4)
@@ -59,13 +62,14 @@ def save_password():
 
 
 def get_password():
-    with open('database.json', encoding="utf8") as fo:
-        data = json.load(fo)
-    u_site = entry_website.get()
-    if u_site in data.keys():
-        u_password = data[u_site]['password']
-        pyperclip.copy(u_password)
-        entry_password.insert(0, u_password)
+    if os.path.exists('password-manager-start/database.json'):
+        with open('password-manager-start/database.json', encoding="utf8") as fo:
+            data = json.load(fo)
+        u_site = entry_website.get()
+        if u_site in data.keys():
+            u_password = data[u_site]['password']
+            pyperclip.copy(u_password)
+            entry_password.insert(0, u_password)
 
 
 # ---------------------------- UI SETUP ------------------------------- #
@@ -75,7 +79,7 @@ window.title('Password Manager')
 window.config(padx=50, pady=50)
 
 canvas = tk.Canvas(width=200, height=200)
-photo = tk.PhotoImage(file='logo.png')
+photo = tk.PhotoImage(file='password-manager-start/logo.png')
 canvas.create_image(100, 100, image=photo)
 canvas.grid(column=1, row=0)
 
